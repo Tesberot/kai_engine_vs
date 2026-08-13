@@ -1,0 +1,34 @@
+seqdiag {
+    participant Main
+    participant Engine
+    participant SceneManager
+    participant Menu
+    participant Play
+
+    Main -> Engine [label = "init()"]
+    Engine -> Engine [label = "SetConfigFlags(...)"]
+    Engine -> Engine [label = "InitWindow(...)"]
+    Engine -> Engine [label = "SearchAndSetResourceDir(...) "]
+    Engine -> SceneManager [label = "changeScene(&menu)"]
+    SceneManager -> Menu [label = "onEnter()"]
+
+    Main -> Engine [label = "run()"]
+    loop while !WindowShouldClose()
+        Engine -> Engine [label = "update()"]
+        Engine -> SceneManager [label = "update()"]
+        SceneManager -> Menu [label = "currentScene->update()"]
+        Engine -> Engine [label = "check KEY_P / KEY_M"]
+        Engine -> SceneManager [label = "changeScene(&play) / changeScene(&menu)"]
+
+        Engine -> Engine [label = "draw()"]
+        Engine -> Engine [label = "BeginDrawing() / ClearBackground(BLACK)"]
+        Engine -> SceneManager [label = "draw()"]
+        SceneManager -> Menu [label = "currentScene->draw()"]
+        Engine -> Engine [label = "EndDrawing()"]
+    end
+
+    Main -> Engine [label = "shutdown()"]
+    Engine -> SceneManager [label = "changeScene(nullptr)"]
+    SceneManager -> Menu [label = "onExit()"]
+    Engine -> Engine [label = "CloseWindow()"]
+}

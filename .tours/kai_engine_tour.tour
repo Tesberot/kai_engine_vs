@@ -1,0 +1,71 @@
+{
+  "$schema": "https://aka.ms/codetour-schema",
+  "title": "kai_engine_tour",
+  "steps": [
+    {
+      "file": "src/main.cpp",
+      "description": "Creamos una instancia de nuestro motor y llamamos al método init para inicializar todo lo relacionado con raylib y el motor. ",
+      "line": 20
+    },
+    {
+      "file": "src/engine.cpp",
+      "description": "Se incializa la ventana y se configura la ruta de la carpeta de assets y le decimos al manejador de escenas que inicie en la escena de Menu.",
+      "line": 22
+    },
+    {
+      "file": "src/main.cpp",
+      "description": "El método run del motor se ejecuta todo el tiempo mientras el juego este en ejecución y se le conoce como el loop principal. ",
+      "line": 21
+    },
+    {
+      "file": "src/engine.cpp",
+      "description": "Mientra el juego esta en ejecución actualizamos los elementos del juego en update y luego los dibujamos en draw. Ejemplo: En update actualizamos la posición del jugador y en draw dibujamos al jugador en la nueva posición. ",
+      "line": 32
+    },
+    {
+      "file": "src/engine.cpp",
+      "description": "En el método update del motor llama al manejador de escenas que se encarga de actualizar la escena activa.",
+      "line": 38
+    },
+    {
+      "file": "include/scene_manager.hpp",
+      "description": "Cuando llamamos al update del manejador de escena primero valida que la escena actual existe y luego la actualiza. ",
+      "line": 32
+    },
+    {
+      "file": "src/menu.cpp",
+      "description": "Como Menu es la escena activa al iniciar es la que el manejador de escenas actualiza. Una vez actualizada la escena regresamos el control a engine y vovelmos al punto que nos quedamos en run justo después del update.  ",
+      "line": 15
+    },
+    {
+      "file": "src/engine.cpp",
+      "description": "Luego de update ejecutamos draw donde se dibujan todos los elementos en pantalla de la escena activa.",
+      "line": 28
+    },
+    {
+      "file": "src/engine.cpp",
+      "description": "Volvemos a llamar al manejador de escenas para que dibuje la escena activa.",
+      "line": 50
+    },
+    {
+      "file": "include/scene_manager.hpp",
+      "description": "El manejador valida que la currenScene sea valida es decir no una escena nula y dibuja la escena actual",
+      "line": 40
+    },
+    {
+      "file": "src/menu.cpp",
+      "description": "Como la escena activa es Menu se llama su método draw y dibuja todos los elementos en pantalla. Finalmente regresamos el control a engine y continuamos donde nos quedamos justo después de draw. ",
+      "line": 26
+    },
+    {
+      "file": "src/engine.cpp",
+      "description": "Como termina el draw el motor sigue en el loop principal y ejecuta indefinidamente draw y update todo el tiempo con la escena activa. Solamente hasta presionemos la tecla esc nuestro juego se sale del loop principal. ",
+      "line": 28
+    },
+    {
+      "file": "src/main.cpp",
+      "description": "Cuando el juego termina se ejecuta shutdown donde se debe liberar cualquier memoria reservada y finalizar la ejecución de la ventana.",
+      "line": 22
+    }
+  ]
+}

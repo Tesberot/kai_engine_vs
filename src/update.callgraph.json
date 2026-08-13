@@ -1,0 +1,21 @@
+{
+  "title": "Call graph for update",
+  "nodes": [
+    {
+      "id": "node-1786404935402",
+      "label": "update",
+      "type": "code",
+      "symbol": {
+        "name": "update",
+        "uri": "src/menu.cpp",
+        "containerName": "kai",
+        "line": 23,
+        "signature": "()"
+      },
+      "status": "normal",
+      "x": 400,
+      "y": 300
+    }
+  ],
+  "edges": []
+}
