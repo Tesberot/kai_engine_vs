@@ -28,13 +28,11 @@ ifeq ($(origin AR), default)
   AR = ar
 endif
 RESCOMP = windres
-INCLUDES += -Ibuild/external/raylib-master/src -Ibuild/external/raylib-master/src/external/glfw/include
+INCLUDES += -Isrc -Iinclude -Ibuild/external/raylib-master/src
 FORCE_INCLUDE +=
 ALL_CPPFLAGS += $(CPPFLAGS) -MD -MP $(DEFINES) $(INCLUDES)
 ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
-LIBS +=
-LDDEPS +=
-LINKCMD = $(AR) -rcs "$@" $(OBJECTS)
+LINKCMD = $(CXX) -o "$@" $(OBJECTS) $(RESOURCES) $(ALL_LDFLAGS) $(LIBS)
 define PREBUILDCMDS
 endef
 define PRELINKCMDS
@@ -44,56 +42,68 @@ endef
 
 ifeq ($(config),debug_x64)
 TARGETDIR = bin/Debug
-TARGET = $(TARGETDIR)/libraylib.a
-OBJDIR = obj/x64/Debug/raylib
+TARGET = $(TARGETDIR)/kai_engine_vs
+OBJDIR = obj/x64/Debug/kai_engine_vs
 DEFINES += -DDEBUG -DPLATFORM_DESKTOP -DGRAPHICS_API_OPENGL_33 -D_GLFW_X11
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -g
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -g
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -g -std=c23
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -g -std=c++20
+LIBS += bin/Debug/libraylib.a -lpthread -lm -ldl -lrt -lX11
+LDDEPS += bin/Debug/libraylib.a
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64
 
 else ifeq ($(config),debug_x86)
 TARGETDIR = bin/Debug
-TARGET = $(TARGETDIR)/libraylib.a
-OBJDIR = obj/x86/Debug/raylib
+TARGET = $(TARGETDIR)/kai_engine_vs
+OBJDIR = obj/x86/Debug/kai_engine_vs
 DEFINES += -DDEBUG -DPLATFORM_DESKTOP -DGRAPHICS_API_OPENGL_33 -D_GLFW_X11
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m32 -g
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m32 -g
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m32 -Wshadow -g -std=c23
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m32 -Wshadow -g -std=c++20
+LIBS += bin/Debug/libraylib.a -lpthread -lm -ldl -lrt -lX11
+LDDEPS += bin/Debug/libraylib.a
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib32 -m32
 
 else ifeq ($(config),debug_arm64)
 TARGETDIR = bin/Debug
-TARGET = $(TARGETDIR)/libraylib.a
-OBJDIR = obj/ARM64/Debug/raylib
+TARGET = $(TARGETDIR)/kai_engine_vs
+OBJDIR = obj/ARM64/Debug/kai_engine_vs
 DEFINES += -DDEBUG -DPLATFORM_DESKTOP -DGRAPHICS_API_OPENGL_33 -D_GLFW_X11
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -g
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -g
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -g -std=c23
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -g -std=c++20
+LIBS += bin/Debug/libraylib.a -lpthread -lm -ldl -lrt -lX11
+LDDEPS += bin/Debug/libraylib.a
 ALL_LDFLAGS += $(LDFLAGS)
 
 else ifeq ($(config),release_x64)
 TARGETDIR = bin/Release
-TARGET = $(TARGETDIR)/libraylib.a
-OBJDIR = obj/x64/Release/raylib
+TARGET = $(TARGETDIR)/kai_engine_vs
+OBJDIR = obj/x64/Release/kai_engine_vs
 DEFINES += -DNDEBUG -DPLATFORM_DESKTOP -DGRAPHICS_API_OPENGL_33 -D_GLFW_X11
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O2
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -O2 -std=c23
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -Wshadow -O2 -std=c++20
+LIBS += bin/Release/libraylib.a -lpthread -lm -ldl -lrt -lX11
+LDDEPS += bin/Release/libraylib.a
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib64 -m64 -s
 
 else ifeq ($(config),release_x86)
 TARGETDIR = bin/Release
-TARGET = $(TARGETDIR)/libraylib.a
-OBJDIR = obj/x86/Release/raylib
+TARGET = $(TARGETDIR)/kai_engine_vs
+OBJDIR = obj/x86/Release/kai_engine_vs
 DEFINES += -DNDEBUG -DPLATFORM_DESKTOP -DGRAPHICS_API_OPENGL_33 -D_GLFW_X11
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m32 -O2
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m32 -O2
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m32 -Wshadow -O2 -std=c23
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m32 -Wshadow -O2 -std=c++20
+LIBS += bin/Release/libraylib.a -lpthread -lm -ldl -lrt -lX11
+LDDEPS += bin/Release/libraylib.a
 ALL_LDFLAGS += $(LDFLAGS) -L/usr/lib32 -m32 -s
 
 else ifeq ($(config),release_arm64)
 TARGETDIR = bin/Release
-TARGET = $(TARGETDIR)/libraylib.a
-OBJDIR = obj/ARM64/Release/raylib
+TARGET = $(TARGETDIR)/kai_engine_vs
+OBJDIR = obj/ARM64/Release/kai_engine_vs
 DEFINES += -DNDEBUG -DPLATFORM_DESKTOP -DGRAPHICS_API_OPENGL_33 -D_GLFW_X11
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -O2
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -O2
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -Wshadow -O2 -std=c23
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -Wshadow -O2 -std=c++20
+LIBS += bin/Release/libraylib.a -lpthread -lm -ldl -lrt -lX11
+LDDEPS += bin/Release/libraylib.a
 ALL_LDFLAGS += $(LDFLAGS) -s
 
 endif
@@ -108,20 +118,16 @@ endif
 GENERATED :=
 OBJECTS :=
 
-GENERATED += $(OBJDIR)/raudio.o
-GENERATED += $(OBJDIR)/rcore.o
-GENERATED += $(OBJDIR)/rglfw.o
-GENERATED += $(OBJDIR)/rmodels.o
-GENERATED += $(OBJDIR)/rshapes.o
-GENERATED += $(OBJDIR)/rtext.o
-GENERATED += $(OBJDIR)/rtextures.o
-OBJECTS += $(OBJDIR)/raudio.o
-OBJECTS += $(OBJDIR)/rcore.o
-OBJECTS += $(OBJDIR)/rglfw.o
-OBJECTS += $(OBJDIR)/rmodels.o
-OBJECTS += $(OBJDIR)/rshapes.o
-OBJECTS += $(OBJDIR)/rtext.o
-OBJECTS += $(OBJDIR)/rtextures.o
+GENERATED += $(OBJDIR)/engine.o
+GENERATED += $(OBJDIR)/kai_gui.o
+GENERATED += $(OBJDIR)/main.o
+GENERATED += $(OBJDIR)/menu.o
+GENERATED += $(OBJDIR)/play.o
+OBJECTS += $(OBJDIR)/engine.o
+OBJECTS += $(OBJDIR)/kai_gui.o
+OBJECTS += $(OBJDIR)/main.o
+OBJECTS += $(OBJDIR)/menu.o
+OBJECTS += $(OBJDIR)/play.o
 
 # Rules
 # #############################################
@@ -131,7 +137,7 @@ all: $(TARGET)
 
 $(TARGET): $(GENERATED) $(OBJECTS) $(LDDEPS) | $(TARGETDIR)
 	$(PRELINKCMDS)
-	@echo Linking raylib
+	@echo Linking kai_engine_vs
 	$(SILENT) $(LINKCMD)
 	$(POSTBUILDCMDS)
 
@@ -152,7 +158,7 @@ else
 endif
 
 clean:
-	@echo Cleaning raylib
+	@echo Cleaning kai_engine_vs
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) rm -f  $(TARGET)
 	$(SILENT) rm -rf $(GENERATED)
@@ -170,7 +176,7 @@ ifneq (,$(PCH))
 $(OBJECTS): $(GCH) | $(PCH_PLACEHOLDER)
 $(GCH): $(PCH) | prebuild
 	@echo $(notdir $<)
-	$(SILENT) $(CC) -x c-header $(ALL_CFLAGS) -o "$@" -MF "$(@:%.gch=%.d)" -c "$<"
+	$(SILENT) $(CXX) -x c++-header $(ALL_CXXFLAGS) -o "$@" -MF "$(@:%.gch=%.d)" -c "$<"
 $(PCH_PLACEHOLDER): $(GCH) | $(OBJDIR)
 ifeq (posix,$(SHELLTYPE))
 	$(SILENT) touch "$@"
@@ -185,27 +191,21 @@ endif
 # File Rules
 # #############################################
 
-$(OBJDIR)/raudio.o: build/external/raylib-master/src/raudio.c
+$(OBJDIR)/engine.o: src/engine.cpp
 	@echo "$(notdir $<)"
-	$(SILENT) $(CC) $(ALL_CFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rcore.o: build/external/raylib-master/src/rcore.c
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/kai_gui.o: src/kai_gui.cpp
 	@echo "$(notdir $<)"
-	$(SILENT) $(CC) $(ALL_CFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rglfw.o: build/external/raylib-master/src/rglfw.c
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/main.o: src/main.cpp
 	@echo "$(notdir $<)"
-	$(SILENT) $(CC) $(ALL_CFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rmodels.o: build/external/raylib-master/src/rmodels.c
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/menu.o: src/menu.cpp
 	@echo "$(notdir $<)"
-	$(SILENT) $(CC) $(ALL_CFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rshapes.o: build/external/raylib-master/src/rshapes.c
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/play.o: src/play.cpp
 	@echo "$(notdir $<)"
-	$(SILENT) $(CC) $(ALL_CFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rtext.o: build/external/raylib-master/src/rtext.c
-	@echo "$(notdir $<)"
-	$(SILENT) $(CC) $(ALL_CFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/rtextures.o: build/external/raylib-master/src/rtextures.c
-	@echo "$(notdir $<)"
-	$(SILENT) $(CC) $(ALL_CFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 
 -include $(OBJECTS:%.o=%.d)
 ifneq (,$(PCH))

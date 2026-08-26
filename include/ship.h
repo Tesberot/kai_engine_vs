@@ -1,9 +1,11 @@
 #pragma once
 #include "entity.h"
+#include "bullet.h"
 
 class Ship : public Entity {
 public:
 	float speed = 20.0f;
+	Bullet bullets[100];
 
 	Ship() {
 		name = "Ship";
@@ -38,6 +40,10 @@ public:
 		if(isActive() || texture.id != 0) {
 			DrawTextureEx(texture, position, 0.0f, 1.0f, WHITE);
 		}
+	}
+
+	void fire(){
+		
 	}
 
 
