@@ -49,6 +49,7 @@ void Engine::draw()
 
 void Engine::shutdown()
 {
+	sceneMgr.shutdown();
 	//sceneManager.changeScene(nullptr); // Exit the current scene
     // Cleanup and shutdown code here
     CloseWindow();

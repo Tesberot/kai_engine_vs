@@ -15,13 +15,10 @@ namespace kai
         Scene *next = nullptr;
 
         SceneManager() = default;
-        ~SceneManager()
-        {
-            if (current)
-                current->exit();
-            for (auto &[name, scene] : scenes)
-                delete scene;
-        }
+		
+
+
+        ~SceneManager() = default;
 
     public:
         static SceneManager &get()
@@ -62,6 +59,15 @@ namespace kai
         {
             if (current)
                 current->draw();
+        }
+
+        void shutdown()
+        {
+            if (current)
+                current->exit();
+            for (auto& [name, scene] : scenes)
+                delete scene;
+            scenes.clear();
         }
 
     private:

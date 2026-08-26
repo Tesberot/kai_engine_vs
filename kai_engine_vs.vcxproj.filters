@@ -21,6 +21,9 @@
     <ClInclude Include="include\circle.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\enemy.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="include\engine.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -36,6 +39,12 @@
     <ClInclude Include="include\play.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="include\player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\player.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="include\raygui.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -48,11 +57,6 @@
     <ClInclude Include="include\scene_manager.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\enemy.h" />
-    <ClInclude Include="include\entity.h" />
-    <ClInclude Include="include\ship.h" />
-    <ClInclude Include="include\entity_manager.h" />
-    <ClInclude Include="include\bullet.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\engine.cpp">

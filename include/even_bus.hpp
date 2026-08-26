@@ -52,6 +52,7 @@ public:
 
 protected:
 	void listen(const std::string& event);
+	void stopListening();
 
 private:
 	struct Subscription {
@@ -105,10 +106,15 @@ inline void EventBus::fire(const std::string& event, EventData data) {
 	}
 }
 
-inline EventListener::~EventListener() {
+inline void EventListener::stopListening() {
 	for (const auto& sub : subscriptions) {
 		EventBus::get().unbind(sub.event, sub.id);
 	}
+	subscriptions.clear();
+}
+
+inline EventListener::~EventListener() {
+
 }
 
 inline void EventListener::listen(const std::string& event) {

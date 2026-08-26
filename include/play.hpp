@@ -2,7 +2,9 @@
 #define PLAY_HPP
 #include "scene.hpp"
 #include "even_bus.hpp"
-#include "player.h"
+#include "ship.h"
+#include "bullet.h"
+#include "entity_manager.h"
 
 
 
@@ -18,7 +20,10 @@ namespace kai {
 		void draw() override;
 		void onEvent(EventData data) override;
 
-		Player player;
+		EntityManager entityMgr;
+		Ship* ship;
+		Ship* ship2;
+		Bullet* bullet;
 		int eventId_01;
 		int eventId_02;
 		int playerScore;
