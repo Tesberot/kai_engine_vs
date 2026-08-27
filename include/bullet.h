@@ -6,7 +6,9 @@ class Bullet : public Entity {
 	
 public: 
 	float speed = 20.0f;
-	Bullet() = default;
+	Bullet(){
+		active = false;
+	};
 
 	
 	void update() override {
@@ -20,7 +22,7 @@ public:
 	}
 
 	void draw() override {
-		DrawCircleV(position, 2.0f, WHITE);
+		DrawCircleV(position, 3.0f, WHITE);
 	}
 
 };

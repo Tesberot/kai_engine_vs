@@ -2,10 +2,12 @@
 #include "entity.h"
 #include "bullet.h"
 
+#define MAX_AMMO 30
+
 class Ship : public Entity {
 public:
 	float speed = 20.0f;
-	Bullet bullets[100];
+	Bullet bullets[MAX_AMMO];
 
 	Ship() {
 		name = "Ship";
@@ -32,6 +34,15 @@ public:
 		if (IsKeyDown(KEY_DOWN)) {
 			position.y += speed;
 		}
+		if (IsKeyPressed(KEY_SPACE)){
+			fire();
+		}
+
+		for(int i = 0; i < MAX_AMMO; i++){
+			if(bullets[i].active){
+				bullets[i].update();
+			}
+		}
 	}
 
 
@@ -40,10 +51,24 @@ public:
 		if(isActive() || texture.id != 0) {
 			DrawTextureEx(texture, position, 0.0f, 1.0f, WHITE);
 		}
+
+		for(int i = 0; i < MAX_AMMO; i++){
+			if(bullets[i].active){
+				bullets[i].draw();
+			}
+		}
+
 	}
 
 	void fire(){
-		
+		for(int i = 0; i < MAX_AMMO; i++){
+			if(!bullets[i].active){
+				bullets[i].position.x = position.x +texture.width/2;
+				bullets[i].position.y = position.y;
+				bullets[i].active = true;
+				break;
+			}
+		}
 	}
 
 
