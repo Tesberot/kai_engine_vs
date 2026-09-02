@@ -3,57 +3,7 @@
   "scopes": [
     {
       "scopeName": "Locals",
-      "variables": [
-        {
-          "name": "this",
-          "evaluateName": "this",
-          "value": "0x5555563aa0c0",
-          "type": "kai::Menu * const",
-          "memoryReference": "0x00005555563aa0c0",
-          "children": [
-            {
-              "name": "this",
-              "evaluateName": "this",
-              "value": "kai::Scene",
-              "type": "kai::Scene"
-            },
-            {
-              "name": "this",
-              "evaluateName": "this",
-              "value": "EventListener",
-              "type": "EventListener"
-            },
-            {
-              "name": "(this).menu_gui",
-              "evaluateName": "(this).menu_gui",
-              "value": "",
-              "type": "kai::MenuGUI",
-              "children": [
-                {
-                  "name": "(this).menu_gui",
-                  "evaluateName": "(this).menu_gui",
-                  "value": "kai::Canvas",
-                  "type": "kai::Canvas"
-                },
-                {
-                  "name": "((this).menu_gui).playBttnId",
-                  "evaluateName": "((this).menu_gui).playBttnId",
-                  "value": "0",
-                  "type": "int",
-                  "memoryReference": "0x0000000000000000"
-                }
-              ]
-            },
-            {
-              "name": "(this).playEventId",
-              "evaluateName": "(this).playEventId",
-              "value": "0",
-              "type": "int",
-              "memoryReference": "0x0000000000000000"
-            }
-          ]
-        }
-      ]
+      "variables": []
     },
     null
   ]

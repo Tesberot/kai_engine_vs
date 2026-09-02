@@ -1,6 +1,7 @@
 #pragma once
 #include "entity.h"
 #include "bullet.h"
+#include "assets.hpp"
 
 #define MAX_AMMO 30
 
@@ -13,11 +14,10 @@ public:
 		name = "Ship";
 		active = true;
 		position = { 400.0f, 300.0f }; // Starting position (placeholder)
-		texture = LoadTexture("ship.png"); // Load ship texture (placeholder)
+		texture = kai::Assets::get().getTexture("ship.png"); // Load ship texture (placeholder)
 	}
 
 	~Ship() {
-		UnloadTexture(texture); // Unload texture when ship is destroyed
 	}
 
 	void update() override {

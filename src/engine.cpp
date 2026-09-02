@@ -1,6 +1,7 @@
 #include "engine.hpp"
 #include "resource_dir.h"	// utility header for SearchAndSetResourceDir
 #include "raylib.h"
+#include "assets.hpp"
 #include "menu.hpp"
 #include "play.hpp"
 
@@ -16,10 +17,11 @@ void Engine::init()
 	TraceLog(LOG_INFO, "Se inicio raylib");
 	// Utility function from resource_dir.h to find the resources folder and set it as the current working directory so we can load from it
 	SearchAndSetResourceDir("resources");
+	assets.init(); // Initialize the asset manager
 	sceneMgr.addScene("menu", new Menu()); // Register the menu scene
 	sceneMgr.addScene("play", new Play()); // Register the play scene
 	sceneMgr.changeScene("menu"); // Set the initial scene to the menu
-
+	
 }
 
 void Engine::run()
@@ -50,6 +52,7 @@ void Engine::draw()
 void Engine::shutdown()
 {
 	sceneMgr.shutdown();
+	assets.shutdown(); // Shutdown the asset manager
 	//sceneManager.changeScene(nullptr); // Exit the current scene
     // Cleanup and shutdown code here
     CloseWindow();
