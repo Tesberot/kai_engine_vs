@@ -3,7 +3,7 @@
 #include "raylib.h"
 #include "assets.hpp"
 #include "menu.hpp"
-#include "play.hpp"
+#include "play_scene.hpp"
 
 namespace kai{
 
@@ -19,7 +19,7 @@ void Engine::init()
 	SearchAndSetResourceDir("resources");
 	assets.init(); // Initialize the asset manager
 	sceneMgr.addScene("menu", new Menu()); // Register the menu scene
-	sceneMgr.addScene("play", new Play()); // Register the play scene
+	sceneMgr.addScene("play", new PlayScene()); // Register the play scene
 	sceneMgr.changeScene("menu"); // Set the initial scene to the menu
 	
 }

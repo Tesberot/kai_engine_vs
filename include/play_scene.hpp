@@ -5,14 +5,17 @@
 #include "ship.h"
 #include "bullet.h"
 #include "entity_manager.h"
+#include "enemy.h"
 
-
+#define MAX_BULLETS 30
+#define MAX_ENEMIES 10
 
 namespace kai {
-	class Play : public Scene, EventListener {
+
+	class PlayScene : public Scene, EventListener {
 	public:
-		Play() = default;
-		~Play() = default;
+		PlayScene() = default;
+		~PlayScene() = default;
 
 		void init() override;
 		void exit() override;
@@ -22,8 +25,11 @@ namespace kai {
 
 		EntityManager entityMgr;
 		Ship* ship;
-		Ship* ship2;
-		Bullet* bullet;
+		Bullet* bullets;
+		Enemy* enemies;
+		float spawnTimer = 0.0f;
+		float SPAWN_INTERVAL = 2.0f;
+
 		int eventId_01;
 		int eventId_02;
 		int playerScore;

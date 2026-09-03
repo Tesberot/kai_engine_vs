@@ -122,12 +122,12 @@ GENERATED += $(OBJDIR)/engine.o
 GENERATED += $(OBJDIR)/kai_gui.o
 GENERATED += $(OBJDIR)/main.o
 GENERATED += $(OBJDIR)/menu.o
-GENERATED += $(OBJDIR)/play.o
+GENERATED += $(OBJDIR)/play_scene.o
 OBJECTS += $(OBJDIR)/engine.o
 OBJECTS += $(OBJDIR)/kai_gui.o
 OBJECTS += $(OBJDIR)/main.o
 OBJECTS += $(OBJDIR)/menu.o
-OBJECTS += $(OBJDIR)/play.o
+OBJECTS += $(OBJDIR)/play_scene.o
 
 # Rules
 # #############################################
@@ -203,7 +203,7 @@ $(OBJDIR)/main.o: src/main.cpp
 $(OBJDIR)/menu.o: src/menu.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
-$(OBJDIR)/play.o: src/play.cpp
+$(OBJDIR)/play_scene.o: src/play_scene.cpp
 	@echo "$(notdir $<)"
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 

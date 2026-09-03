@@ -15,19 +15,19 @@ public:
 	}
 
 	void update() {
-		
 		for (Entity* entity : entities) {
 			if (entity && entity->active) {
 				entity->update();
+				entity->collider.update(entity->position);
 			}
 		}
-	
 	}
 
 	void draw() {
 		for (Entity* entity : entities) {
 			if (entity && entity->active) {
 				entity->draw();
+				entity->collider.debugDraw();
 			}
 		}
 	}

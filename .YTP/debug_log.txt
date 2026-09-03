@@ -3,7 +3,57 @@
   "scopes": [
     {
       "scopeName": "Locals",
-      "variables": []
+      "variables": [
+        {
+          "name": "pos",
+          "evaluateName": "pos",
+          "value": "{...}",
+          "type": "Vector2",
+          "children": [
+            {
+              "name": "(pos).x",
+              "evaluateName": "(pos).x",
+              "value": "-nan(0x7fd790)",
+              "type": "float"
+            },
+            {
+              "name": "(pos).y",
+              "evaluateName": "(pos).y",
+              "value": "4.59163468e-41",
+              "type": "float"
+            }
+          ]
+        },
+        {
+          "name": "this",
+          "evaluateName": "this",
+          "value": "0x555555831918",
+          "type": "Enemy * const",
+          "memoryReference": "0x0000555555831918",
+          "children": [
+            {
+              "name": "this",
+              "evaluateName": "this",
+              "value": "kai::Entity",
+              "type": "kai::Entity"
+            },
+            {
+              "name": "(this).speed",
+              "evaluateName": "(this).speed",
+              "value": "10",
+              "type": "float",
+              "memoryReference": "0x000000000000000a"
+            },
+            {
+              "name": "(this).radius",
+              "evaluateName": "(this).radius",
+              "value": "3",
+              "type": "int",
+              "memoryReference": "0x0000000000000003"
+            }
+          ]
+        }
+      ]
     },
     null
   ]

@@ -2,12 +2,16 @@
 #include "entity.h"
 #include "raylib.h"
 
+using namespace kai;
+
 class Bullet : public Entity {
 	
 public: 
-	float speed = 20.0f;
+	float speed = 10.0f;
+	int radius = 3;
 	Bullet(){
 		active = false;
+		collider.radius = 3;
 	};
 
 	
@@ -22,7 +26,7 @@ public:
 	}
 
 	void draw() override {
-		DrawCircleV(position, 3.0f, WHITE);
+		DrawCircleV(position, radius, WHITE);
 	}
 
 };

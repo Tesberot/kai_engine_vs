@@ -3,18 +3,21 @@
 #include "bullet.h"
 #include "assets.hpp"
 
-#define MAX_AMMO 30
+
+using namespace kai;
 
 class Ship : public Entity {
 public:
 	float speed = 20.0f;
-	Bullet bullets[MAX_AMMO];
+	Bullet* bullets = nullptr;
+	int maxBullets = 10;
 
 	Ship() {
 		name = "Ship";
 		active = true;
 		position = { 400.0f, 300.0f }; // Starting position (placeholder)
-		texture = kai::Assets::get().getTexture("ship.png"); // Load ship texture (placeholder)
+		texture = Assets::get().getTexture("ship.png"); // Load ship texture (placeholder)
+		collider.radius = texture.width / 2.0f; // Set collider radius based on texture size
 	}
 
 	~Ship() {
@@ -38,32 +41,22 @@ public:
 			fire();
 		}
 
-		for(int i = 0; i < MAX_AMMO; i++){
-			if(bullets[i].active){
-				bullets[i].update();
-			}
-		}
 	}
 
 
 	void draw() override {
 		// Draw the ship (placeholder logic)
 		if(isActive() || texture.id != 0) {
-			DrawTextureEx(texture, position, 0.0f, 1.0f, WHITE);
-		}
-
-		for(int i = 0; i < MAX_AMMO; i++){
-			if(bullets[i].active){
-				bullets[i].draw();
-			}
+			Vector2 pos = {position.x-texture.width/2,position.y-texture.height/2};
+			DrawTextureEx(texture, pos, 0.0f, 1.0f, WHITE);
 		}
 
 	}
 
 	void fire(){
-		for(int i = 0; i < MAX_AMMO; i++){
+		for(int i = 0; i < maxBullets; i++){
 			if(!bullets[i].active){
-				bullets[i].position.x = position.x +texture.width/2;
+				bullets[i].position.x = position.x;
 				bullets[i].position.y = position.y;
 				bullets[i].active = true;
 				break;
